@@ -38,9 +38,17 @@ class MatchesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Matches $matches)
+    public function show($id)
     {
         //
+
+        $match = Matches::find($id);
+
+        if (!$match) {
+            return response()->json(['message' => 'Stade not found'], 404);
+        }
+    
+        return response()->json($match);
     }
 
     /**

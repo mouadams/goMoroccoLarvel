@@ -37,9 +37,17 @@ class EquipesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Equipes $equipes)
+    public function show($id)
     {
         //
+
+        $equipe = Equipes::find($id);
+
+        if (!$equipe) {
+            return response()->json(['message' => 'Stade not found'], 404);
+        }
+    
+        return response()->json($equipe);
     }
 
     /**

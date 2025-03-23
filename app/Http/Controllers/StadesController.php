@@ -24,13 +24,7 @@ class StadesController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+  
 
     /**
      * Store a newly created resource in storage.
@@ -43,19 +37,21 @@ class StadesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Stades $stades)
+    public function show($id)
     {
-        $stade = Stades::where('id', $stades->id)->first();
-        return response()->json(data: $stade);
+
+        $stade = Stades::find($id);
+
+        if (!$stade) {
+            return response()->json(['message' => 'Stade not found'], 404);
+        }
+    
+        return response()->json($stade);
+        // $stade = Stades::where('id', $stades->id)->first();
+        // return response()->json(data: $stade);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Stades $stades)
-    {
-        //
-    }
+  
 
     /**
      * Update the specified resource in storage.

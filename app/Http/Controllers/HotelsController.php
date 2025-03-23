@@ -14,6 +14,9 @@ class HotelsController extends Controller
     public function index()
     {
         //
+        $hotels = Hotels::all();
+        
+        return response()->json(data: $hotels);
     }
 
     /**
@@ -35,9 +38,17 @@ class HotelsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Hotels $hotels)
+    public function show($id)
     {
         //
+
+        $hotel = Hotels::find($id);
+
+        if (!$hotel) {
+            return response()->json(['message' => 'Stade not found'], 404);
+        }
+    
+        return response()->json($hotel);
     }
 
     /**
