@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReastauransController;
 use App\Http\Controllers\StadesController;
 use App\Http\Controllers\MatchesController;
 use App\Http\Controllers\EquipesController;
 use App\Http\Controllers\HotelsController;
+use App\Http\Controllers\RestaurantController;
 use App\Models\Hotels;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -44,10 +46,12 @@ Route::get('/hotels', [HotelsController::class, 'index'])->name('hotels');
 
 
 
+
 Route::get('/equipes/{id}', [EquipesController::class, 'show'])->name('equipes.show');
 Route::get('/stades/{id}', [StadesController::class, 'show'])->name('stades.show');
 Route::get('/hotels/{id}', [HotelsController::class, 'show'])->name('hotels.show');
 Route::get('/matches/{id}', [MatchesController::class, 'show'])->name('matches.show');
+
 
 
 require __DIR__.'/auth.php';

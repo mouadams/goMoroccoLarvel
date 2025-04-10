@@ -11,7 +11,7 @@ class UpdateHotelsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateHotelsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string',
+            'etoiles' => 'required|integer|min:1|max:5',  
+            'image' => 'required|string|url',  
+            'prix' => 'required|string|max:100',  
+            'distance' => 'required|string|max:100',
+            'stadeId' => 'required|integer|exists:stades,id'
+            
         ];
     }
 }
