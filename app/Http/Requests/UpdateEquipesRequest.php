@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;  
 
 class UpdateEquipesRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateEquipesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,41 @@ class UpdateEquipesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom' => [
+                'sometimes',
+                'string',
+                'max:255',
+                Rule::unique('equipes')->ignore($this->equipes->id)
+            ],
+            'drapeau' => 'sometimes|url|max:500|starts_with:https://',
+            'groupe' => 'sometimes|string|size:1|in:A,B,C,D,E,F',
+            'abreviation' => [
+                'sometimes',
+                'string',
+                'size:3',
+                'alpha',
+                Rule::unique('equipes')->ignore($this->equipes->id)
+            ],
+            'confederation' => 'sometimes|string|max:100',
+            'entraineur' => 'sometimes|string|max:255|nullable',
+            'rang' => 'sometimes|integer|min:1|max:300',
+        ];
+    }
+
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'nom.string' => 'Le nom de l\'équipe doit être une chaîne de caractères',
+            'nom.unique' => 'Ce nom d\'équipe existe déjà',
+            'abreviation.unique' => 'Cette abréviation existe déjà',
+            'rang.integer' => 'Le rang doit être un nombre entier',
+            'rang.min' => 'Le rang minimum est 1',
         ];
     }
 }

@@ -22,14 +22,17 @@ class UpdateHotelsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => 'required|string|max:255',
-            'description' => 'required|string',
-            'etoiles' => 'required|integer|min:1|max:5',  
-            'image' => 'required|string|url',  
-            'prix' => 'required|string|max:100',  
-            'distance' => 'required|string|max:100',
-            'stadeId' => 'required|integer|exists:stades,id'
-            
+            'nom' => 'sometimes|string|max:255',
+            'description' => 'sometimes|string',
+            'etoiles' => 'sometimes|integer|min:1|max:5',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'prix' => 'sometimes|string|max:100',
+            'distance' => 'sometimes|string|max:100',
+            'adresse' => 'sometimes|string|max:100',
+            'phone' => 'sometimes|string|regex:/^[0-9]{8,15}$/',
+            'wifi' => 'nullable|boolean',
+            'piscine' => 'nullable|boolean',
+            'stadeId' => 'sometimes|integer|exists:stades,id',
         ];
     }
 }

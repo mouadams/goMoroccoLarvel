@@ -26,6 +26,11 @@ class RestaurantController extends Controller
     public function store(StoreRestaurantRequest $request)
     {
         $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('restaurants', 'public');
+            $validated['image'] = $imagePath;
+        }
     
     $restaurant = Restaurant::create([
         'nom' => $validated['nom'],
@@ -78,7 +83,7 @@ class RestaurantController extends Controller
             'prixMoyen' => $validated['prixMoyen'],
             'horaires' => $validated['horaires'] ?? null,
             'telephone' => $validated['telephone'] ?? null,
-            'image' => $validated['image'],
+            //'image' => $validated['image'],
             'stadeId' => $validated['stadeId'] 
         ]);
     

@@ -39,18 +39,24 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/stades', [StadesController::class, 'index'])->name('stades');
-Route::get("/matches", [MatchesController::class, 'index'])->name('matches');
-Route::get("/equipes", [EquipesController::class, 'index'])->name('equipes');
-Route::get('/hotels', [HotelsController::class, 'index'])->name('hotels');
 
 
 
 
-Route::get('/equipes/{id}', [EquipesController::class, 'show'])->name('equipes.show');
-Route::get('/stades/{id}', [StadesController::class, 'show'])->name('stades.show');
-Route::get('/hotels/{id}', [HotelsController::class, 'show'])->name('hotels.show');
-Route::get('/matches/{id}', [MatchesController::class, 'show'])->name('matches.show');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

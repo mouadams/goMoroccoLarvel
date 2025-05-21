@@ -31,7 +31,7 @@ class UpdateRestaurantRequest extends FormRequest
             'prixMoyen' => 'required|string|max:100',
             'horaires' => 'sometimes|string|max:255',
             'telephone' => 'sometimes|string|max:20',
-            'image' => 'required|string',
+            //'image' => 'required|string',
             'stadeId' => 'required|integer|exists:stades,id'
         ];
     }

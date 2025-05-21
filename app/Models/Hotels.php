@@ -16,6 +16,10 @@ class Hotels extends Model
         'image',
         'prix',
         'distance',
+        'adresse',
+        'phone',
+        'wifi',
+        'piscine',
         'stadeId',
     ];
 

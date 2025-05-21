@@ -4,7 +4,7 @@
 
 return [
     
-    'paths' => ['api/*', 'sanctum/csrf-cookie','csrf-token'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie','*'],
     'allowed_methods' => ['*'],
     'allowed_origins' => ['http://localhost:8080'], // Allow React frontend
     'allowed_origins_patterns' => [],

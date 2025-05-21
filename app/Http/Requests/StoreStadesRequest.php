@@ -11,7 +11,7 @@ class StoreStadesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class StoreStadesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            
+            'nom' => 'required|string|max:255',
+            'ville' => 'required|string|max:255',
+            'capacite' => 'required|integer|min:1',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            "description" => "required|string|max:500",
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
+            'annee_construction' => 'required|integer|min:1800|max:'.(date('Y')+1)
         ];
     }
 }

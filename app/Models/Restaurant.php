@@ -19,11 +19,11 @@ class Restaurant extends Model
         'adresse',
         'note',
         'distance',
-        'prixMoyen', // Database column name (matches migration)
+        'prixMoyen', 
         'horaires',
         'telephone',
         'image',
-        'stadeId' // Database column name
+        'stadeId' 
     ];
 
     public $timestamps = false;

@@ -11,18 +11,27 @@ class StoreMatchesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+            return [
+                'stadeId' => 'required|integer|exists:stades,id',
+                'equipe1' => 'required|integer',
+                'equipe2' => 'required|integer',
+                'date' => 'required|date',
+                'heure' => 'required|string',
+                'phase' => 'required|string|max:255',
+                'groupe' => 'nullable|string|max:255',
+                'score1' => 'nullable|integer|min:0',
+                'score2' => 'nullable|integer|min:0',
+                'termine' => 'boolean',
+            ];
     }
 }

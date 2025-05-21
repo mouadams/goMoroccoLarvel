@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\HotelsController;
+use App\Http\Controllers\StadesController;
+use App\Http\Controllers\MatchesController;
+use App\Http\Controllers\EquipesController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -23,4 +26,28 @@ Route::get('/hotels/{id}', [HotelsController::class, 'show'])->name('hotels.show
 Route::post('/hotels', [HotelsController::class, 'store'])->name('hotels.store');
 Route::put('/hotels/{id}', [HotelsController::class, 'update'])->name('hotels.update');
 Route::delete('/hotels/{id}', [HotelsController::class, 'destroy'])->name('hotels.delet');
+
+
+Route::get("/equipes", [EquipesController::class, 'index'])->name('equipes');
+Route::get('/equipes/{id}', [EquipesController::class, 'show'])->name('equipes.show');
+Route::post('/equipes', [EquipesController::class, 'store'])->name('equipes.store');
+Route::put('/equipes/{id}', [EquipesController::class, 'update'])->name('equipes.update');
+Route::delete('/equipes/{id}', [EquipesController::class, 'destroy'])->name('equipes.destroy');
+
+
+Route::get("/matches", [MatchesController::class, 'index'])->name('matches');
+Route::get('/matches/{id}', [MatchesController::class, 'show'])->name('matches.show');
+Route::post('/matches', [MatchesController::class, 'store'])->name('matches.store');
+Route::put('/matches/{id}', [MatchesController::class, 'update'])->name('matches.update');
+Route::delete('/matches/{id}', [MatchesController::class, 'destroy'])->name('matches.destroy');
+
+
+
+Route::get('/stades', [StadesController::class, 'index'])->name('stades.index');
+Route::get('/stades/{id}', [StadesController::class, 'show'])->name('stades.show');
+Route::post('/stades', [StadesController::class, 'store'])->name('stades.store');
+Route::put('/stades/{id}', [StadesController::class, 'update'])->name('stades.update');
+Route::delete('/stades/{id}', [StadesController::class, 'destroy'])->name('stades.destroy');
+
+
 

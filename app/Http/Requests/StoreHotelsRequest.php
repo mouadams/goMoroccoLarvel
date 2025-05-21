@@ -24,11 +24,15 @@ class StoreHotelsRequest extends FormRequest
         return [
             'nom' => 'required|string|max:255',
             'description' => 'required|string',
-            'etoiles' => 'required|integer|min:1|max:5',  
-            'image' => 'required|string|url',  
-            'prix' => 'required|string|max:100',  
+            'etoiles' => 'required|integer|min:1|max:5',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'prix' => 'required|string|max:100',
             'distance' => 'required|string|max:100',
-            'stadeId' => 'required|integer|exists:stades,id'
+            'adresse' => 'required|string|max:100',
+            'phone' => 'required|string|regex:/^[0-9]{8,15}$/', 
+            'wifi' => 'nullable|boolean',
+            'piscine' => 'nullable|boolean',
+            'stadeId' => 'required|integer|exists:stades,id',
         ];
     }
 }
