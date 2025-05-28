@@ -23,21 +23,23 @@ class UpdateStadesRequest extends FormRequest
     public function rules(): array
     {
         $stadeId = $this->route('stades') ? $this->route('stades')->id : null;
-
+        
         return [
             'nom' => [
+                'sometimes', // Changed from 'required' to 'sometimes'
                 'required',
                 'string',
                 'max:255',
                 Rule::unique('stades')->ignore($stadeId)
             ],
-            'ville' => 'required|string|max:255',
-            'capacite' => 'required|integer|min:1',
+            'ville' => 'sometimes|required|string|max:255', // Added 'sometimes'
+            'capacite' => 'sometimes|required|integer|min:1', // Added 'sometimes'
             'image' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
-            'description' => 'nullable|string',
-            'latitude' => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
+            'description' => 'sometimes|nullable|string', // Added 'sometimes'
+            'latitude' => 'sometimes|required|numeric|between:-90,90', // Added 'sometimes'
+            'longitude' => 'sometimes|required|numeric|between:-180,180', // Added 'sometimes'
             'annee_construction' => [
+                'sometimes', // Added 'sometimes'
                 'required',
                 'integer',
                 'min:1800',

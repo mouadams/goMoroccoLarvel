@@ -22,12 +22,15 @@ class UpdateEquipesRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Get the ID from the route parameter
+        $equipeId = $this->route('id') ?? $this->route('equipe');
+        
         return [
             'nom' => [
                 'sometimes',
                 'string',
                 'max:255',
-                Rule::unique('equipes')->ignore($this->equipes->id)
+                Rule::unique('equipes')->ignore($equipeId)
             ],
             'drapeau' => 'sometimes|url|max:500|starts_with:https://',
             'groupe' => 'sometimes|string|size:1|in:A,B,C,D,E,F',
@@ -36,7 +39,7 @@ class UpdateEquipesRequest extends FormRequest
                 'string',
                 'size:3',
                 'alpha',
-                Rule::unique('equipes')->ignore($this->equipes->id)
+                Rule::unique('equipes')->ignore($equipeId)
             ],
             'confederation' => 'sometimes|string|max:100',
             'entraineur' => 'sometimes|string|max:255|nullable',

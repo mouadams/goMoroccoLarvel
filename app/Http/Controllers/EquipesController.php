@@ -113,9 +113,8 @@ class EquipesController extends Controller
     {
         try {
             $equipe = Equipes::findOrFail($id);
-
             $validated = $request->validated();
-            
+           
             // Only update fields that were provided
             $updateData = [];
             foreach ($validated as $key => $value) {
@@ -141,13 +140,13 @@ class EquipesController extends Controller
             }
     
             $equipe->update($updateData);
-            
+           
             return response()->json([
                 'success' => true,
                 'message' => 'Équipe mise à jour avec succès',
                 'data' => $equipe->fresh()
             ], 200);
-            
+           
         } catch (\Exception $e) {
             Log::error('Failed to update equipe: '.$e->getMessage());
             return response()->json([

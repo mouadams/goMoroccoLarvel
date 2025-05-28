@@ -6,6 +6,7 @@ use App\Models\Stades;
 use App\Http\Requests\StoreStadesRequest;
 use App\Http\Requests\UpdateStadesRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class StadesController extends Controller
 {
@@ -70,30 +71,53 @@ class StadesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStadesRequest $request, Stades $stades)
-    {
-        // Get ALL input data including the unchanged fields
+    public function update(UpdateStadesRequest $request, $id)
+{
+    try {
+        // Find the stade by ID
+        $stades = Stades::find($id);
+        
+        if (!$stades) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Stade not found'
+            ], 404);
+        }
+
+        // Get validated data
         $validated = $request->validated();
         
         // Handle file upload if present
         if ($request->hasFile('image')) {
             // Delete old image if exists
-            if ($stades->image) {
+            if ($stades->image && Storage::disk('public')->exists($stades->image)) {
                 Storage::disk('public')->delete($stades->image);
             }
-            
+           
             $imagePath = $request->file('image')->store('stades', 'public');
             $validated['image'] = $imagePath;
         }
-    
+        
+        // Update the stade
         $stades->update($validated);
-    
+        
+        // Refresh to get updated data
+        $stades->refresh();
+        
         return response()->json([
             'success' => true,
             'data' => $stades,
             'message' => 'Stade updated successfully'
         ]);
+        
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'error' => $e->getMessage(),
+            'message' => 'Failed to update stade'
+        ], 500);
     }
+}
 
     /**
      * Remove the specified resource from storage.
