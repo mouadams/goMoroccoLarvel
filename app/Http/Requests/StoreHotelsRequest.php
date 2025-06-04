@@ -25,14 +25,16 @@ class StoreHotelsRequest extends FormRequest
             'nom' => 'required|string|max:255',
             'description' => 'required|string',
             'etoiles' => 'required|integer|min:1|max:5',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'ville' => 'required|string|max:255', // Make sure this is present and correct
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // For create, this should be required
             'prix' => 'required|string|max:100',
             'distance' => 'required|string|max:100',
-            'adresse' => 'required|string|max:100',
-            'phone' => 'required|string|regex:/^[0-9]{8,15}$/', 
-            'wifi' => 'nullable|boolean',
-            'piscine' => 'nullable|boolean',
-            'stadeId' => 'required|integer|exists:stades,id',
+            'adresse' => 'required|string|max:255', // Assuming max 255
+            'phone' => 'required|string|regex:/^[0-9]{8,15}$/', // Matching frontend regex
+            'wifi' => 'boolean', // Assuming it's a boolean (0 or 1)
+            'parking' => 'boolean', // Make sure this is present
+            'piscine' => 'boolean', // Assuming it's a boolean (0 or 1)
+            'stadeId' => 'required|integer|min:1', // Assuming min 1
         ];
     }
 }

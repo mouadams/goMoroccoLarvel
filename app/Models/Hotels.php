@@ -13,14 +13,16 @@ class Hotels extends Model
         'nom',
         'description',
         'etoiles',
+        'ville',
         'image',
         'prix',
         'distance',
         'adresse',
-        'phone',
+        'phone', // Ensure this matches your column name
         'wifi',
+        'parking',
         'piscine',
-        'stadeId',
+        'stadeId', // Ensure this matches your column name
     ];
 
 

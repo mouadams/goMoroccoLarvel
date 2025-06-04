@@ -22,28 +22,29 @@ class UpdateStadesRequest extends FormRequest
      */
     public function rules(): array
     {
-        $stadeId = $this->route('stades') ? $this->route('stades')->id : null;
-        
+        $stadeId = $this->route('stade') ? $this->route('stade')->id : null; 
+        // Note: I've changed 'stades' to 'stade' in the route name for clarity.
+        // Make sure it matches your route definition (e.g., Route::put('/stades/{stade}', ...)).
+        // If your route parameter is still 'stades', keep $this->route('stades').
+
         return [
             'nom' => [
-                'sometimes', // Changed from 'required' to 'sometimes'
-                'required',
+                'sometimes', // Only validate 'nom' if it's present in the request
                 'string',
                 'max:255',
                 Rule::unique('stades')->ignore($stadeId)
             ],
-            'ville' => 'sometimes|required|string|max:255', // Added 'sometimes'
-            'capacite' => 'sometimes|required|integer|min:1', // Added 'sometimes'
+            'ville' => 'sometimes|string|max:255',
+            'capacite' => 'sometimes|integer|min:1',
             'image' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
-            'description' => 'sometimes|nullable|string', // Added 'sometimes'
-            'latitude' => 'sometimes|required|numeric|between:-90,90', // Added 'sometimes'
-            'longitude' => 'sometimes|required|numeric|between:-180,180', // Added 'sometimes'
+            'description' => 'sometimes|nullable|string',
+            'latitude' => 'sometimes|numeric|between:-90,90',
+            'longitude' => 'sometimes|numeric|between:-180,180',
             'annee_construction' => [
-                'sometimes', // Added 'sometimes'
-                'required',
+                'sometimes',
                 'integer',
                 'min:1800',
-                'max:'.(date('Y')+1)
+                'max:' . (date('Y') + 1)
             ]
         ];
     }

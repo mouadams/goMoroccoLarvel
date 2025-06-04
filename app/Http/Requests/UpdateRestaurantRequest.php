@@ -21,18 +21,20 @@ class UpdateRestaurantRequest extends FormRequest
      */
     public function rules(): array
     {
+        // For an update request, almost all fields should be 'sometimes'
+        // unless there's a very specific reason they *must* always be present.
         return [
-            'nom' => 'required|string|max:255',
-            'cuisine' => 'required|string|max:255',
-            'description' => 'required|string',
-            'adresse' => 'required|string|max:255',
-            'note' => 'required|numeric|min:1|max:5',
-            'distance' => 'required|string|max:100',
-            'prixMoyen' => 'required|string|max:100',
-            'horaires' => 'sometimes|string|max:255',
-            'telephone' => 'sometimes|string|max:20',
-            //'image' => 'required|string',
-            'stadeId' => 'required|integer|exists:stades,id'
+            'nom' => 'sometimes|string|max:255',
+            'cuisine' => 'sometimes|string|max:255',
+            'description' => 'sometimes|string',
+            'adresse' => 'sometimes|string|max:255',
+            'note' => 'sometimes|numeric|min:1|max:5',
+            'distance' => 'sometimes|string|max:100',
+            'prixMoyen' => 'sometimes|string|max:100',
+            'horaires' => 'sometimes|nullable|string|max:255',
+            'telephone' => 'sometimes|nullable|string|max:20',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'stadeId' => 'sometimes|integer|exists:stades,id'
         ];
     }
 }
