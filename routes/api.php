@@ -7,6 +7,7 @@ use App\Http\Controllers\HotelsController;
 use App\Http\Controllers\StadesController;
 use App\Http\Controllers\MatchesController;
 use App\Http\Controllers\EquipesController;
+use App\Http\Controllers\ActivityController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -48,6 +49,14 @@ Route::get('/stades/{id}', [StadesController::class, 'show'])->name('stades.show
 Route::post('/stades', [StadesController::class, 'store'])->name('stades.store');
 Route::put('/stades/{id}', [StadesController::class, 'update'])->name('stades.update');
 Route::delete('/stades/{id}', [StadesController::class, 'destroy'])->name('stades.destroy');
+
+
+Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
+Route::get('/activities/{id}', [ActivityController::class, 'show'])->name('activities.show');
+Route::post('/activities', [ActivityController::class, 'store'])->name('activities.store');
+Route::put('/activities/{id}', [ActivityController::class, 'update'])->name('activities.update');
+Route::delete('/activities/{id}', [ActivityController::class, 'destroy'])->name('activities.destroy');
+
 
 
 

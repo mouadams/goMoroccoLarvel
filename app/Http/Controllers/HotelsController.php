@@ -7,6 +7,9 @@ use App\Http\Requests\StoreHotelsRequest;
 use App\Http\Requests\UpdateHotelsRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
+use Exception;
 
 
 class HotelsController extends Controller
@@ -161,7 +164,6 @@ class HotelsController extends Controller
             ], 500);
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
